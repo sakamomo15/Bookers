@@ -12,8 +12,7 @@ class BooksController < ApplicationController
   def index
     @books = Book.all
     @book = Book.new # newから移動
-    # @book_show = Book.find(params[:id]) # showからコピー
-
+    # showボタン用の定義は、@books |book|からid引っ張れるので
   end
 
   def show

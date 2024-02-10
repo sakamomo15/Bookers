@@ -12,7 +12,7 @@ class BooksController < ApplicationController
   def index
     @books = Book.all
     @book = Book.new # newから移動
-    # showボタン用の定義は、@books |book|からid引っ張れるので
+    # showボタン用の定義は、@books |book|からid引っ張れるので不要
   end
 
   def show
@@ -21,6 +21,12 @@ class BooksController < ApplicationController
 
   def edit
     @book = Book.find(params[:id])
+  end
+  
+  def update
+    book = Book.find(params[:id])
+    book.update(book_params)
+    redirect_to book_path(book.id)
   end
 
   def destroy

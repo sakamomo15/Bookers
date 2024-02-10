@@ -1,1 +1,23 @@
 <h1>Books</h1>
+
+  <table>
+    <% @books.each do |book| %>
+
+      <thead>
+        <tr>
+          <th>Table</th>
+          <th>Body</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><%= book.title %></td>
+          <td><%= book.body %></td>
+          <td><a href="books/show">Show</a></td>
+          <td><a href="books/edit">Edit</a></td>
+          <td><a>Destroy</a></td>
+        </tr>
+      </tbody>
+
+    <% end %>
+  </table>

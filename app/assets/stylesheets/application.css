@@ -54,12 +54,12 @@ form {
   margin-bottom: 10px;
 }
 
-.flash-message.notice {
+.flash {
   color: green;
   margin: 30px;
 }
 
-.flash-message.alert {
+.flash-errors {
   color: red;
   margin: 30px;
 }

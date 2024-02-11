@@ -10,7 +10,7 @@ class BooksController < ApplicationController
       flash[:notice] = "Book was successfully created."
       redirect_to book_path(@book.id) #idに対応したshowに遷移するため引数必須
     else
-      flash.now[:alert] = "#{@book.errors.count}errors prohibited this book from being saved:"
+      @books = Book.all # renderでindexを表示しようとすると@booksの定義がcreateにも必要
       render :index
     end
   end
@@ -36,8 +36,7 @@ class BooksController < ApplicationController
       flash[:notice] = "Book was successfully updated."
       redirect_to book_path(@book.id)
     else
-      flash.now[:alert] = "#{@book.errors.count}errors prohibited this book from being updated:"
-      render edit_book_path(@book.id)
+      render :edit
     end
   end
 

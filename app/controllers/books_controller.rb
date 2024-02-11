@@ -4,9 +4,15 @@ class BooksController < ApplicationController
   end
 
   def create
-    book = Book.new(book_params) #viewはないのでローカル変数
-    book.save
-    redirect_to book_path(book.id) #idに対応したshowに遷移するため引数必須
+    @book = Book.new(book_params)
+    #viewはないのでローカル変数と思いきや,flashのためHTMl変換必要なので@変数
+    if @book.save
+      flash[:notice] = "Book was successfully created."
+      redirect_to book_path(@book.id) #idに対応したshowに遷移するため引数必須
+    else
+      flash.now[:notice] = " errors prohibited this book from being sabed:"
+      render :index
+    end
   end
 
   def index
@@ -22,11 +28,16 @@ class BooksController < ApplicationController
   def edit
     @book = Book.find(params[:id])
   end
-  
+
   def update
-    book = Book.find(params[:id])
-    book.update(book_params)
-    redirect_to book_path(book.id)
+    @book = Book.find(params[:id])
+    if @book.update(@book_params)
+      flash[:notice] = "Book was successfully updated."
+      redirect_to book_path(@book.id)
+    else
+      flash.now[:notice] = " errors prohibited this book from being updated:"
+      render edit_book_path(@book.id)
+    end
   end
 
   def destroy

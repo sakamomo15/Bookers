@@ -53,3 +53,8 @@ form {
 .field {
   margin-bottom: 10px;
 }
+
+.flash {
+  color: green;
+  margin: 30px;
+}

@@ -1,5 +1,15 @@
 <h1>Editing Book</h1>
 
+<div class="flash">
+  <%= flash.now[:alert] %>
+
+    <ul>
+      <% @book.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+</div>
+
 <%= form_with model: @book, url: book_path(@book.id), method: :patch do |f| %>
   <div class="field">
     <h4>Title</h4>
@@ -17,6 +27,6 @@
   
 <% end %>
 
-  <%= link_to "Show", book_path(@book.id) %>
-   |
-  <%= link_to "Back", books_path %>
+<%= link_to "Show", book_path(@book.id) %>
+  |
+<%= link_to "Back", books_path %>

@@ -10,7 +10,7 @@ class BooksController < ApplicationController
       flash[:notice] = "Book was successfully created."
       redirect_to book_path(@book.id) #idに対応したshowに遷移するため引数必須
     else
-      flash.now[:notice] = " errors prohibited this book from being sabed:"
+      flash.now[:alert] = "#{@book.errors.count}errors prohibited this book from being saved:"
       render :index
     end
   end
@@ -31,19 +31,25 @@ class BooksController < ApplicationController
 
   def update
     @book = Book.find(params[:id])
-    if @book.update(@book_params)
+
+    if @book.update(book_params)
       flash[:notice] = "Book was successfully updated."
       redirect_to book_path(@book.id)
     else
-      flash.now[:notice] = " errors prohibited this book from being updated:"
+      flash.now[:alert] = "#{@book.errors.count}errors prohibited this book from being updated:"
       render edit_book_path(@book.id)
     end
   end
 
   def destroy
-    book = Book.find(params[:id])
-    book.destroy
-    redirect_to books_path
+    @book = Book.find(params[:id])
+
+    if @book.destroy
+      flash[:notice] = "Book was successfully destroyed."
+      redirect_to books_path
+    else
+      render :index
+    end
   end
 
   private
